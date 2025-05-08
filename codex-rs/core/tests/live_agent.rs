@@ -1,3 +1,5 @@
+#![expect(clippy::expect_used)]
+
 //! Live integration tests that exercise the full [`Agent`] stack **against the real
 //! OpenAI `/v1/responses` API**.  These tests complement the lightweight mock‑based
 //! unit tests by verifying that the agent can drive an end‑to‑end conversation,

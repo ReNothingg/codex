@@ -212,7 +212,9 @@ fn extract_heredoc_body_from_apply_patch_command(src: &str) -> anyhow::Result<St
 
     let lang = BASH.into();
     let mut parser = Parser::new();
-    parser.set_language(&lang).expect("load bash grammar");
+    parser
+        .set_language(&lang)
+        .with_context(|| "failed to load bash grammar")?;
     let tree = parser
         .parse(src, None)
         .ok_or_else(|| anyhow::anyhow!("failed to parse patch into AST"))?;

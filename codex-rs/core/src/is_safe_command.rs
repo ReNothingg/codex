@@ -75,7 +75,12 @@ fn is_safe_to_call_with_exec(command: &[String]) -> bool {
 fn try_parse_bash(bash_lc_arg: &str) -> Option<Tree> {
     let lang = BASH.into();
     let mut parser = Parser::new();
-    parser.set_language(&lang).expect("load bash grammar");
+
+    // If the language fails to load we consider the input unparseable, so we
+    // return `None` instead of panicking.
+    if parser.set_language(&lang).is_err() {
+        return None;
+    }
 
     let old_tree: Option<&Tree> = None;
     parser.parse(bash_lc_arg, old_tree)

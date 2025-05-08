@@ -74,6 +74,10 @@ pub enum CodexErr {
     #[error("sandbox error: {0}")]
     Sandbox(#[from] SandboxErr),
 
+    // Api Key Missing
+    #[error("Responses API requires an API key")]
+    ResponsesApiKey,
+
     // -----------------------------------------------------------------
     // Automatic conversions for common external error types
     // -----------------------------------------------------------------
